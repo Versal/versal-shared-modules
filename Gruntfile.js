@@ -26,9 +26,9 @@ module.exports = function(grunt) {
           cjsTranslate: true,
           optimize: 'none',
           paths: {
-            'cdn.jquery': 'node_modules/versal-shared-libs/lib/core.min',
-            'cdn.backbone': 'node_modules/versal-shared-libs/lib/core.min',
-            'cdn.underscore': 'node_modules/versal-shared-libs/lib/core.min',
+            'cdn.jquery': 'empty:',
+            'cdn.backbone': 'empty:',
+            'cdn.underscore': 'empty:',
 
             'text': 'test/lib/text'
             //download text.js mannually from https://raw.github.com/requirejs/text/latest/text.js
