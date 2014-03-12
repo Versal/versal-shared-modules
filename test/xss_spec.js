@@ -1,7 +1,7 @@
 /* global define, expect, it, describe, beforeEach, afterEach*/
 
 define(
-["scripts/versal_sanitize", "cdn.jquery"],
+["scripts/lib/versal.sanitize", "cdn.jquery"],
 function(VersalSanitize, $){
 
   var sanitizationRules = {

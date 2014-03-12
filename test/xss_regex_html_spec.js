@@ -1,5 +1,5 @@
 define(
-["cdn.jquery",  "scripts/versal_sanitize", "cdn.underscore"],
+["cdn.jquery",  "scripts/lib/versal.sanitize", "cdn.underscore"],
 function($, VersalSanitize, _){
 
   var sanitizationOptions = {
