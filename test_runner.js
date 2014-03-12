@@ -9,6 +9,8 @@ Contains an URL protocol, like "http:" or "https:".
 
   /* app specs here */
   var specs = [
+    'test/xss_spec',
+    'test/xss_regex_html_spec'
   ];
 
   //temp solution for now

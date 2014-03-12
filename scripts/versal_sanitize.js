@@ -100,5 +100,65 @@ function ($, _ , Sanitize) {
     return outputHTML;
   };
 
+  //optional sanitization functions
+  VS.whiteListTagsFull = function(input, options){
+    //remove tags except the whitelisted ones
+    var tagsRemoved = VS.removeTags(input, options);
+
+    //remove attributes for start tags, except for <a> and <font>
+    var attrsRemovedStartTags = VS.removeAttrs(tagsRemoved, options);
+
+    //remove attributes for end tags
+    var attrsRemovedEndTags = VS.removeAttrsEndTags(attrsRemovedStartTags, options);
+
+    //filter attributes for <a> and <font>
+    var attrsKept = VS.keepAttrs(attrsRemovedEndTags);
+
+    //todo
+    //check protocol for a tags
+    return attrsKept;
+  };
+
+  //for start tags and <br>
+  VS.removeAttrs = function(input, options){
+    //remove attributes for most whitelisted tags except <a> and <font>
+    var noAttrElements = _.reject(options.elements, function(item){
+      return (item === 'a' || item === 'font');
+    });
+    // http://forums.udacity.com/questions/5008300/hw3-3-basic-regex-for-matching-word-from-a-list-of-words
+    // [] only matches single char
+    // (?:) is a non-capturing group with disjunction
+    // Example regex is
+    // <\s*((?:b|u|ul|li|strong|em|h1|h2|h3|h4|h5|h6|blockquote|a|p|font|br))(?:\s+[^>]*>|>|\/>)
+    //
+    // \s* matches zero or more spaces
+    // ((?:b|u|ul|li|strong|em|h1|h2|h3|h4|h5|h6|blockquote|a|p|font|br)) matches one of those tags
+    // (?:\s+[^>]*>|>|\/>) matches <tag > or <tag> or <tag/>
+    // note the last / is for <br/>
+    var nRegex = new RegExp('<\\s*((?:' + noAttrElements.join('|') + '))(?:\\s+[^>]*>|>|\/>)', 'ig');
+    return input.replace(nRegex, '<$1>');
+  };
+
+  VS.keepAttrs = function(input){
+    //keep attribues for <a> and <font>
+    //string.replace(regex, iterator)
+    //the iterator is synchronous, similar to underscore iterators
+    //http://stackoverflow.com/questions/19083357/are-all-javascript-callbacks-asynchronous-if-not-how-do-i-know-which-are
+    // a: ['href', 'target', 'title'],
+    // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/replace
+    var keepA = input.replace(/<\s*a\s+([^>]*)>/ig, function(match, p1){
+      var filtered = p1.match(/((?:href|target|title)\s*=\s*(?:(?:"[^"]*")|(?:'[^']*')))/ig) || [];
+      return '<a ' + filtered.join(' ') + '>';
+    });
+
+    // font: ['face']
+    var keepFont = keepA.replace(/<\s*font\s+([^>]*)>/ig, function(match, p1){
+      var filtered = p1.match(/(face\s*=\s*(?:(?:"[^"]*")|(?:'[^']*')))/ig) || [];
+      return '<font ' + filtered.join(' ') + '>';
+    });
+
+    return keepFont;
+  };
+
   return VS;
 });
