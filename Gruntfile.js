@@ -21,10 +21,19 @@ module.exports = function(grunt) {
       dist: {
         options: {
           baseUrl: './',
-          name: 'plugins/vs.analytics',
-          out: 'lib/vs.analytics.js',
+          name: 'scripts/versal_sanitize',
+          out: 'lib/vs.sanitize.js',
           cjsTranslate: true,
-          optimize: 'none'
+          optimize: 'none',
+          paths: {
+            'cdn.jquery': 'node_modules/versal-shared-libs/lib/core.min',
+            'cdn.backbone': 'node_modules/versal-shared-libs/lib/core.min',
+            'cdn.underscore': 'node_modules/versal-shared-libs/lib/core.min',
+
+            'text': 'test/lib/text'
+            //download text.js mannually from https://raw.github.com/requirejs/text/latest/text.js
+            //and put it in test/lib/text.js
+          }
         }
       }
     }
