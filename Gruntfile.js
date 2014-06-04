@@ -21,8 +21,8 @@ module.exports = function(grunt) {
       dist: {
         options: {
           baseUrl: './',
-          name: 'scripts/versal_sanitize',
-          out: 'lib/vs.sanitize.js',
+          name: 'scripts/lib/versal.sanitize',
+          out: 'lib/versal.sanitize.js',
           cjsTranslate: true,
           optimize: 'none',
           paths: {
