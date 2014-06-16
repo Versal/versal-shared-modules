@@ -1,6 +1,6 @@
 {
-  "name": "gadget-reusable-components",
-  "description": "Temporary place for sharing reusable components across different gadgets",
+  "name": "shared-modules",
+  "description": "Sharing reusable modules across different JavaScript applications",
   "author": "Versal Team",
   "version": "0.0.1",
   "private": true,
