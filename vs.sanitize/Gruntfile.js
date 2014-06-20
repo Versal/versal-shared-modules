@@ -1,39 +1,49 @@
 module.exports = function(grunt) {
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
-
+    opts: {
+      path: '.',
+      name: 'vs.sanitize'
+    },
     mocha: {
-      src: ['test_runner.html'],
-      options: {
-        reporter: 'Spec'
+      all: {
+        options: {
+          log: true,
+          urls: [ 'http://localhost:1337/test_runner.html' ],
+          reporter: 'Spec',
+          run: true
+        }
       }
     },
-
+    connect: {    /* for tesing in mocha */
+      server: {
+        options: {
+          port: 1337,
+          base: '<%= opts.path %>'
+        }
+      }
+    },
     watch: {
       scripts: {
-        //re-run testing when .js files change
-        files: ['gadget.js', 'scripts/**/*.js', 'test/**/*.js'],
-        tasks: ['mocha']
+        files: ['scripts/**/*.js', 'test/**/*.js'],
+        tasks: ['browserify', 'mocha']
       }
     },
-
-    requirejs: {
-      dist: {
+    browserify: {
+      dev: {
         options: {
-          baseUrl: './',
-          name: 'scripts/lib/versal.sanitize',
-          out: 'lib/versal.sanitize.js',
-          cjsTranslate: true,
-          optimize: 'none',
-          paths: {
-            'cdn.jquery': 'empty:',
-            'cdn.backbone': 'empty:',
-            'cdn.underscore': 'empty:',
-
-            'text': 'test/lib/text'
-            //download text.js mannually from https://raw.github.com/requirejs/text/latest/text.js
-            //and put it in test/lib/text.js
+          bundleOptions: {
+            /* absolutely necessary */
+            standalone: '<%= opts.name %>'
           }
+        },
+        files: {
+          '<%= opts.path %>/dist/<%= opts.name %>.js': ['<%= opts.path %>/scripts/versal.sanitize.js']
+        }
+      },
+      test: {
+        files: {
+          '<%= opts.path %>/dist/test.js': ['<%= opts.path %>/test/**/*.js']
         }
       }
     }
@@ -41,9 +51,10 @@ module.exports = function(grunt) {
 
   grunt.loadNpmTasks('grunt-mocha');
   grunt.loadNpmTasks('grunt-contrib-watch');
-  grunt.loadNpmTasks('grunt-contrib-requirejs');
+  grunt.loadNpmTasks('grunt-contrib-connect');
+  grunt.loadNpmTasks('grunt-browserify');
 
-  grunt.registerTask('test', ['mocha']);
+  grunt.registerTask('test', ['connect', 'mocha']);
 
-  grunt.registerTask('default', ['requirejs' ,'mocha', 'watch']);
+  grunt.registerTask('default', ['browserify', 'test', 'watch']);
 };
