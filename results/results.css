@@ -1,0 +1,100 @@
+.image-view-wrapper {
+  position: relative;
+}
+.results {
+  width: 75%;
+  overflow: hidden;
+  position: absolute;
+  top: 0;
+  left: 0.5%;
+  right: 0;
+  bottom: 0;
+  z-index: -1;
+  padding: .025em;
+  background-color: #fefdf9;
+  opacity: 0;
+  transition: all 0.5s;
+}
+.results.active {
+  opacity: 1;
+  z-index: 100;
+  transition: opacity 0.5s;
+}
+.pie-container {
+  height: 200px;
+  width: 200px;
+  margin: 50px auto;
+}
+.pie-background {
+  background-color: #3a968a;
+  position: absolute;
+  width: 200px;
+  height: 200px;
+  -moz-border-radius: 200px;
+  -webkit-border-radius: 200px;
+  -o-border-radius: 200px;
+  border-radius: 200px;
+  /* Firefox */
+  -moz-transition: all 1s ease;
+  /* WebKit */
+  -webkit-transition: all 1s ease;
+  /* Opera */
+  -o-transition: all 1s ease;
+  /* Standard */
+  transition: all 1s ease;
+}
+.pie-slice-cover {
+  position: absolute;
+  width: 200px;
+  height: 200px;
+  -moz-border-radius: 200px;
+  -webkit-border-radius: 200px;
+  -o-border-radius: 200px;
+  border-radius: 200px;
+  clip: rect(0px, 200px, 200px, 100px);
+}
+.pie-slice-cover .pie-slice-fill {
+  /* Firefox */
+  -moz-transition: all 1s ease;
+  /* WebKit */
+  -webkit-transition: all 1s ease;
+  /* Opera */
+  -o-transition: all 1s ease;
+  /* Standard */
+  transition: all 1s ease;
+  position: absolute;
+  width: 200px;
+  height: 200px;
+  -moz-border-radius: 200px;
+  -webkit-border-radius: 200px;
+  -o-border-radius: 200px;
+  border-radius: 200px;
+  clip: rect(0px, 100px, 200px, 0px);
+}
+.results .answer-count {
+    width: 40%;
+    margin: auto;
+    font-size: 1.25em;
+}
+.results .answer-count:after {
+  content: '';
+  clear: both;
+  display: table;
+}
+
+.results .answer-count .answer-label-type {
+  text-align: left;
+  float: left;
+}
+
+.results .answer-count .number-incorrect,
+.results .answer-count .number-correct {
+  text-align: right;
+  float: right;
+}
+.results .answer-count .number-correct {
+  color: #3a968a;
+}
+.results .answer-count .number-incorrect {
+  color: #ce3e30;
+}
