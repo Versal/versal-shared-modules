@@ -13,7 +13,23 @@
             var expect = chai.expect;
         </script>
 
-        <script src="./node_modules/requirejs/require.js" data-main="test_runner"></script>
+        <!-- cdn so that we don't have to manage them -->
+        <script src="//cdnjs.cloudflare.com/ajax/libs/underscore.js/1.6.0/underscore-min.js"></script>
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/backbone.js/1.1.2/backbone-min.js"></script>
 
+        <!-- the module code to be tested -->
+        <script src="dist/vs.sanitize.js"></script>
+
+        <!-- the specs -->
+        <script type="text/javascript" src="dist/test.js"></script>
+
+        <!-- run mocha after all test are loaded -->
+        <script type="text/javascript" charset="utf-8">
+          // Only tests run in real browser, injected script run if options.run == true
+          if (navigator.userAgent.indexOf('PhantomJS') < 0) {
+            mocha.run();
+          }
+        </script>
     </body>
 </html>
