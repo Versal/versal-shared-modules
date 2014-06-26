@@ -1,4 +1,4 @@
-var template = require('../templates/results.hbs');
+var template = require('./results.hbs');
 
 var ResultAnimator = function(options) {
   this.correct = options.totalScore;
@@ -8,7 +8,7 @@ var ResultAnimator = function(options) {
 
 ResultAnimator.prototype.updateScore = function(correct, incorrect) {
   this.correct = correct;
-  this.incorrect = options.incorrect;
+  this.incorrect = incorrect;
 };
 
 ResultAnimator.prototype.displayResults = function() {
