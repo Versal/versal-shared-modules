@@ -1,4 +1,3 @@
-/* global _ */
 (function (root, factory) {
     if (typeof define === 'function' && define.amd) {
         // AMD. Register as an anonymous module.
@@ -14,12 +13,26 @@
   }
 }(this, function () {
 
+  var _extend;
+  if(typeof _ === 'function' && _.extend) {
+    _extend = _.extend;
+  } else {
+    //straight from underscore
+    //http://underscorejs.org/docs/underscore.html
+    _extend = function(obj) {
+      Array.prototype.forEach.call(Array.prototype.slice.call(arguments, 1), function(source) {
+        if (source) {
+          for (var prop in source) {
+            obj[prop] = source[prop];
+          }
+        }
+      });
+      return obj;
+    };
+  }
+
   var BaseMethods = {
     propertiesObject : {
-      src: {
-        get: function(){ return this.getAttribute('src') || 'about:blank'; }
-      },
-
       editable: {
         get: function(){ return this.getAttribute('editable') === 'true'; }
       },
@@ -34,19 +47,6 @@
 
       userstate: {
         get: function(){ return this.readAttributeAsJson('data-userstate'); }
-      },
-
-      debug: {
-        get: function(){ return this.hasAttribute('debug'); }
-      },
-
-      apiVersion: {
-        get: function(){
-          if(!this._apiVersion) {
-            this._apiVersion = new Semver(this.getAttribute('data-api-version') || '0.0.0');
-          };
-          return this._apiVersion;
-        }
       }
     },
 
@@ -59,12 +59,12 @@
         detail: {}
       };
       //add eventName and data
-      _.extend(eventObj, {
+      _extend(eventObj, {
         type: '' + eventName,
         detail: data
       });
       //add options
-      _.extend(eventObj, options);
+      _extend(eventObj, options);
       //fire away
       this.dispatchEvent( new CustomEvent(eventName, eventObj) );
     },
@@ -78,7 +78,7 @@
     },
 
     readAttributeAsJson : function(name) {
-      if(!this.hasAttribute(name)) { return false; }
+      if(!this.hasAttribute(name)) { return undefined; }
       return JSON.parse(this.getAttribute(name));
     }
   };
