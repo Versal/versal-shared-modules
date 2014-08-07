@@ -1,41 +1,29 @@
-Shared Modules, modules reusable across different gadgets
-==========================
+# Shared Modules, modules reusable across different gadgets
 
 ### A place to share UMD JavaScript modules
 - each module should be created as a sub directory
 - each module should then register itself for export inside the index.js in the root of the repo
 
-### To use with npm
-Add this to your package.json
-```
-"devDependencies": {
-  "shared-modules": "git+ssh://git@github.com:Versal/shared-modules"
-}
-```
-Then
-```
-npm install
-```
-Then in your code, if you are using CommonJS
-```
-var YourModule = require('shared-modules').yourModule;
-```
-
 ### To use with bower
 Add this to your bower.json
 ```
 "dependencies": {
-  "versal-shared-modules": "git@github.com:Versal/shared-modules.git"
+  "versal-shared-modules": "versal-shared-modules"
 }
 ```
-Then
+
+Then run:
+
 ```
 bower install
 ```
-Then in your HTML, if you are into Browser globals
+
+Then in your HTML, if you are into browser globals:
+
 ```
 <script type="text/javascript" src="../versal-shared-modules/your_module/your_module.js"></script>
 ```
+
 And now the module should be available under window.yourModule
 
 

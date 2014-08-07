@@ -1,8 +1,8 @@
 {
   "name": "versal-shared-modules",
   "main": "index.js",
-  "version": "0.0.2",
-  "homepage": "https://github.com/Versal/shared-modules",
+  "version": "0.1.0",
+  "homepage": "https://github.com/Versal/versal-shared-modules",
   "authors": [
     "Shaohua Zhou <shao@versal.com>"
   ],
@@ -10,8 +10,7 @@
   "keywords": [
     "versal-shared-modules"
   ],
-  "license": "all rights reserved",
-  "private": true,
+  "license": "MIT",
   "ignore": [
     "**/.*",
     "node_modules",
