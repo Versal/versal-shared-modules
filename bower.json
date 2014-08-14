@@ -1,7 +1,7 @@
 {
   "name": "versal-shared-modules",
   "main": "index.js",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "homepage": "https://github.com/Versal/versal-shared-modules",
   "authors": [
     "Shaohua Zhou <shao@versal.com>"
